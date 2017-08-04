@@ -1,1 +1,1 @@
-# kubernetes_ci_platform
+# continuous_integration_platform
