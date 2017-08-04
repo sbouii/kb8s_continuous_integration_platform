@@ -2,6 +2,7 @@
 
 ##Create infrastructure and inventory file
 echo "Creating infrastructure"
+cd kubespray
 vagrant up
 create_inventory_file.sh
 ##Run Ansible playbooks
