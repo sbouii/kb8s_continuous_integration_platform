@@ -4,7 +4,6 @@
 echo "Creating infrastructure"
 cd kubespray
 vagrant up
-create_inventory_file.sh
 ##Run Ansible playbooks
 echo "Quick sleep while instances spin up"
 sleep 120
