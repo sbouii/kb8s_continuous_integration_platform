@@ -1,0 +1,6 @@
+- hosts: kb8s-master
+  sudo: yes
+  tasks:
+  - roles:
+    - kb8s-common
+    - kb8s-master

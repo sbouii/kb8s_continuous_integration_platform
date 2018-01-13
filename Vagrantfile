@@ -11,6 +11,12 @@ Vagrant.configure(2) do |config|
    # Disable the default /vagrant share
    config.vm.synced_folder "../data", "/vagrant_data" , disabled: true
 
+   # Update /etc/hosts in all VMs
+   config.hostmanager.enabled = true
+   config.hostmanager.manage_host = true
+   config.hostmanager.include_offline = true
+  
+   # Set up kb8s master
    config.vm.define "kb8s-master" do |cfg|
     cfg.vm.network "private_network", ip: "192.168.33.101"
     cfg.vm.hostname = "kb8s-master"
@@ -26,13 +32,14 @@ Vagrant.configure(2) do |config|
      ansible.verbose = 'v'
     end
    end
+   # Set up kb8s nodes
    config.vm.define "kb8s-node1" do |cfg|
     cfg.vm.network "private_network", ip: "192.168.33.102"
     cfg.vm.hostname = "kb8s-node1"
     cfg.vm.provider "virtualbox" do |vb|
      vb.gui = true
      vb.name = 'kb8s-node1'
-     vb.memory = "1100"
+     vb.memory = "900"
     end
     cfg.vm.provision :ansible do |ansible|
      ansible.playbook = 'provision/node1_provision.yml'
@@ -47,7 +54,7 @@ Vagrant.configure(2) do |config|
     cfg.vm.provider "virtualbox" do |vb|
      vb.gui = true
      vb.name = 'kb8s-node2'
-     vb.memory = "1100"
+     vb.memory = "900"
     end
     cfg.vm.provision :ansible do |ansible|
      ansible.playbook = 'provision/node2_provision.yml'
