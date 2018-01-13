@@ -9,3 +9,11 @@
     name: kubelet
     enabled: yes
     state: started
+
+- name: restart kubelet service
+  service:
+    name: kubelet
+    state: restarted
+
+- name: reload systemd
+  shell: systemctl daemon-reload

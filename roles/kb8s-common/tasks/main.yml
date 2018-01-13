@@ -27,4 +27,10 @@
 # By default kubelet takes the IP of the first network interface available which is the NAT interface in the case of Vagrant boxes and it's the same IP on the NAT interface for all Vagrant boxes.
 # fixed by overwriting the kubelet service definition to match the ip defined for node in the Vagrantfile.
 
-- name: 
+- name: overwrite kubelet configuration
+  template:
+   src: 10-kubeadm.conf
+   dest: /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
+  notify:
+   - reload systemd
+   - restart kubelet
