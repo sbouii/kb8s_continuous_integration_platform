@@ -1,0 +1,6 @@
+- name: Initialise kubernetes Cluster
+  shell: kubeadm init --token={{ kubeadm_token }} --api-advertise-addresses={{ inventory_name }}
+
+- name: deploy network pod
+  shell: kubectl --kubeconfig ./admin.conf apply -f https://git.io/weave-kube
+

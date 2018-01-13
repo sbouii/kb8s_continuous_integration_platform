@@ -1,0 +1,30 @@
+- name: Add kubernetes repository
+  yum_repository:
+    name: {{ kubernetes_redhat_repository_name }}
+    description: {{ kubernetes_redhat_repository_description }}
+    baseurl:  http://yum.kubernetes.io/repos/kubernetes-el7-x86_64
+    gpgcheck: yes
+    enabled: yes
+    repo_gpgcheck: yes 
+    gpgkey:
+      - https://packages.cloud.google.com/yum/doc/yum-key.gpg
+      - https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+
+- name: Install kubeadm and dependencies
+  yum:
+   name: {{ item }}
+   state: installed
+   with_items:
+    - docker.io
+    - kubelet
+    - kubeadm
+    - kubectl
+    - kubernetes-cni   
+   update_cache: yes
+   notify:
+    - start docker service
+    - start kubelet service
+# By default kubelet takes the IP of the first network interface available which is the NAT interface in the case of Vagrant boxes and it's the same IP on the NAT interface for all Vagrant boxes.
+# fixed by overwriting the kubelet service definition to match the ip defined for node in the Vagrantfile.
+
+- name: 
