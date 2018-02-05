@@ -1,6 +1,5 @@
 - hosts: kb8s-node2
   sudo: yes
-  tasks:
-  - roles:
-    - kb8s-common
-    - kb8s-node
+  roles:
+   - kb8s-common
+   - kb8s-node

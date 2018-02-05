@@ -1,7 +1,7 @@
 - name: Add kubernetes repository
   yum_repository:
-    name: {{ kubernetes_redhat_repository_name }}
-    description: {{ kubernetes_redhat_repository_description }}
+    name: "{{ kubernetes_redhat_repository_name }}"
+    description: "{{ kubernetes_redhat_repository_description }}"
     baseurl:  http://yum.kubernetes.io/repos/kubernetes-el7-x86_64
     gpgcheck: yes
     enabled: yes
@@ -12,7 +12,7 @@
 
 - name: Install kubeadm and dependencies
   yum:
-   name: {{ item }}
+   name: "{{ item }}"
    state: installed
    with_items:
     - docker.io
@@ -24,7 +24,7 @@
    notify:
     - start docker service
     - start kubelet service
-# By default kubelet takes the IP of the first network interface available which is the NAT interface in the case of Vagrant boxes and it's the same IP on the NAT interface for all Vagrant boxes.
+# By default as the node ip kubelet takes the IP of the first network interface available which is the NAT interface in the case of Vagrant boxes and it's the same IP on the NAT interface for all Vagrant boxes.
 # fixed by overwriting the kubelet service definition to match the ip defined for node in the Vagrantfile.
 
 - name: overwrite kubelet configuration
