@@ -6,3 +6,4 @@
 
 - name: Deploy addons pods | kubernetes Dashboard pods
   shell: kubectl --kubeconfig ./admin.conf apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/src/deploy/recommended/kubernetes-dashboard.yaml
+## TO DO Deploy jenkins pods
